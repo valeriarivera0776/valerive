@@ -1,0 +1,34 @@
+﻿library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
+entity comparator_4bit is
+    Port (
+        A       : in  STD_LOGIC;
+        B       : in  STD_LOGIC;
+        Ag_B  : out STD_LOGIC; – – A greater than B
+        Ae_B  : out STD_LOGIC; – – A equal to B
+        Al_B  : out STD_LOGIC – – A less than b
+    );
+end comparator_4bit;
+
+
+architecture Behavioral of comparator_4bit is
+begin
+    process (A, B)
+    begin
+        if A > B then
+            Ag_B <= '1';
+            Ae_B <= '0';
+            Al_B <= '0';
+        elsif A = B then
+            Ag_B <= '0';
+            Ae_B <= '1';
+            Al_B <= '0';
+        else
+            Ag_B <= '0';
+            Ae_B <= '0';
+            Al_B <= '1';
+        end if;
+    end process;
+end Behavioral;
