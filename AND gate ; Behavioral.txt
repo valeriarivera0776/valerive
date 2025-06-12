@@ -1,0 +1,14 @@
+﻿library ieee; 
+use ieee.std_logic_1164.all;
+
+
+Entity and_gate is 
+Port (a,b : in std_logic;
+        y : out std_logic);
+End and_gate;
+
+
+Architecture Behavioral of and_gate is 
+Begin
+y<= a and b;
+End Behavioral;

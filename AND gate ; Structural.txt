@@ -1,0 +1,18 @@
+﻿Library ieee;
+Use ieee.std_logic_1164.all;
+
+
+Entity and_gate is 
+Port (a,b : in std_logic;
+        y : out std_logic);
+End and_gate; 
+
+
+Architecture structural and_gate is 
+Component AND
+        Port (a,b : in std_logic; 
+                y : out std_logic);
+End component;
+Begin
+U1: AND port map ( a<=a, b<=b,y<=y);
+End structural;
