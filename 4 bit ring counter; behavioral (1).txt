@@ -1,0 +1,26 @@
+﻿Library ieee; 
+Use ieee.std_logic_1164.all;
+
+
+Entity ring_counter is 
+Port (clk, reset: in std_logic;
+        Q: out std_logic_vector(3 down to 0) 
+);
+End ring_counter;
+
+
+Architecture behavioral of ring_counter i s
+        Signal temp : std_logic_vector(3 down to 0):= “1000”;
+Begin
+        Process (clk,reset)
+Begin 
+        If reset =’1’ then
+        temp<=”1000”;
+        Elsif rising_edge(clk) then 
+        Temp<=temp(2 down to 0) 
+End if;
+End process; 
+
+
+Q<=temp;
+End behavioral;
