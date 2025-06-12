@@ -1,0 +1,55 @@
+﻿Library ieee;
+Use ieee.std_logic_1164.all 
+
+
+Entity comp4bit is 
+End comp4bit;
+
+
+Architecture structural of comp4bit is 
+Component comp4bit 
+Port ( a , b : in std_logic_vector(3 down to 0);
+        agt_b, aeq_b, alt_b : out std_logic
+
+);
+End component;
+
+
+Signal A, B : std_logic_vector(3 down to 0);
+Signal agt_b : std_logic;
+Signal aeq_b : std_logic;
+Signal alt_b : std_logic;
+
+
+Begin 
+
+
+UUT: comp4bit 
+        Port map (
+a=>a, b=>b, agt_b=>agt_b, aeq_b=>aeq_b,  alt_b => alt_b 
+);
+
+
+stimulus : process 
+Begin 
+– – a=b
+a<= “1010”;
+b<= “1010”;
+Wait for 10 ns;
+
+
+– – a>b
+a<= “1100”;
+b<= “1001”;
+Wait for 10 ns;
+
+
+– – a<b
+a<= “0111”;
+b<= “1000”;
+Wait for 10 ns; 
+
+
+Wait;
+End process; 
+End structural;

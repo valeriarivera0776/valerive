@@ -1,0 +1,51 @@
+﻿Library ieee;
+Use ieee.std_logic_1164.all;
+
+
+Entity comp4bit is 
+Port ( a,b: in std_logic_vector (3 down to 0);
+        agt_b : out std_logic; – – A greater than B
+        aeq_b : out std_logic; – – A equal B
+        alt_b : out std_logic); – – A less than B
+End comp4bit;
+
+
+Architecture Structural of comp4bit is 
+Component comp1bit
+Port ( a : in std_logic;
+        b : in std_logic;
+        gt_in : in std_logic;  – – greater than in 
+        eq_in : in std_logic; – – equal to in
+        lt_in : in std_logic; – – less than in
+        gt_out : out std_logic; – – greater than out 
+        eq_out : out std_logic; – – equal to out 
+        lt_out : out std_logic); – –  less than out
+End component;
+
+
+Signal gt : std_logic_vector (3 down to 0); 
+Signal eq : std_logic_vector (3 down to 0);
+Signal lt : std_logic _vector (3 down to 0);
+
+
+Begin 
+– – Least significant bit compairson
+ LSB:comp1bit port map ( 
+a=>a(0), b=>b(0), gt_in=>’0’,eq_in=>’1’, lt_in=>’0’, gt_out=>gt(0), eq_out=>eq(0), lt_out=>lt(0) ); 
+ – — first bit 
+B1: comp1bit port map (
+a=>a(1), b=>b(1), gt_in=>gt(0), eq_in=>eq(0), lt_in=>lt(0), gt_out=>gt(1), eq_out=>eq(1), lt_out=>lt(1)
+);
+– – Bit 2
+B2: comp1bit port map (
+a=>a(2), b=>b(2), gt_in=>gt(1), eq_in=>eq(1), lt_in=>lt(1), gt_out=>gt(2), eq_out=>eq(2), lt_out=>lt(2)
+);
+
+
+– – Most significant bit (bit 3)
+MSB: comp1bit port map (
+a=>a(3), b=>b(3), gt_in=>gt(2), eq_in=>eq(2), lt_in=>lt(2), gt_out=>agt_b, eq_out=>aeq_b , lt_out=>alt_b 
+);
+
+
+End structural;
