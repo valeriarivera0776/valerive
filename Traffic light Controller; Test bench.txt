@@ -1,0 +1,53 @@
+﻿Library ieee;
+Use ieee.std_logic_1164.all;
+
+
+Entity trafficlight is 
+End trafficlight; 
+
+
+Architecture sim of trafficlight is 
+Component trafficlight
+Port (clk,reset : in std_logic;
+        red,yellow,green : out std_logic; 
+);
+End component;
+
+
+Signal clk : in std_logic :=’0’;
+Signal reset : in std_logic := ‘1’;
+Signal red : std_logic;
+Signal yellow : std_logic;
+Signal green : std_logic ;
+
+
+Begin
+
+
+uut: trafficlight
+        Port map (
+clk=>clk, reset=>reset, red=>red, yellow=>yellow, green=>green
+);
+
+
+Clk_process : process
+ Begin 
+        While true loop 
+        clk<=’0’;
+        Wait for 5 ns;
+        clk<=’1’;
+        Wait for 5 ns;
+End loop;
+End process;
+
+
+Stim_process : process 
+Begin 
+        Wait for 10 ns; 
+        Reset <=’0’;
+
+
+        Wait for 100 ns; 
+        Wait;
+End process; 
+End sim;

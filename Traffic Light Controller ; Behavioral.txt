@@ -1,0 +1,64 @@
+﻿Library ieee; 
+Use ieee.std_logic_1164.all;
+
+
+Entity trafficlight is 
+Port (clk,reset : in std_logic; 
+        Red,yellow,green : out std_logic 
+);
+
+
+End trafficlight;
+
+
+Architecture Behavioral trafficlight is 
+Type state_type  is (red,green, yellow);
+Signal state : state_type:=red;
+
+
+Begin
+
+
+Process (clk,reset) 
+Begin
+ If reset =’1’ then 
+state<=red;
+counter<=’0’;
+Elsif rising_edge(clk) then 
+Case state is 
+When red=>
+If counter <4 then
+counter<=counter +1;
+        Else
+State<=green;
+counter<=’0’;
+End if ;
+
+
+When green=>
+If counter< 3 then
+counter<=counter +1;
+Else
+State <=yellow;
+counter<=’0’;
+End if;
+
+
+When yellow=>
+If counter <1 then 
+counter<=counter+1;
+Else 
+State <=red;
+counter<=’0’;
+End if;
+End case
+End if; 
+End process;
+
+
+red<=’1’ when state = red else ‘0’;
+yellow<=’1’ when state = yellow else ‘0’;
+green <= ‘1’ when state = green else ‘0’;
+
+
+End Behavioral;
